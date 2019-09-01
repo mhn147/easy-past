@@ -1,0 +1,11 @@
+.original-url {
+    width: 400px;
+}
+
+.created {
+    min-width: 120px;
+}
+
+.__copy-btn {
+    cursor: pointer;
+}

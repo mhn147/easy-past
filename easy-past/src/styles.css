@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+.p-0 {
+    padding: 0 !important;
+}
+
+.pb-0 {
+    padding-bottom: 0 !important; 
+}
+
+.mx-1 {
+    margin: 0 0.5rem !important;
+}
+
+.vertically-align-bottom {
+    vertical-align: bottom;
+}

@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./url-input.component.css']
 })
 export class UrlInputComponent implements OnInit {
-
-    shortUrl: string = "https://rel.ink/kXMOOn";
+    inputUrl: string = '';
+    shortUrl: string = '';
+    errorMessage: string = '';
 
   constructor() { }
 
@@ -16,7 +17,23 @@ export class UrlInputComponent implements OnInit {
 
   shorten(e): void {
       this.preventDefault(e);
-      console.log('shortening...');
+      //resetting the errorMessage
+      this.errorMessage = '';
+      if (!this.validateURL()){
+          this.errorMessage = 'Invalid URL format';
+          return;
+      }
+
+  }
+
+  onKey(): void {
+    if (this.validateURL()){
+        this.errorMessage = '';
+    }
+  }
+
+  validateURL(): boolean {
+      return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(this.inputUrl);
   }
 
   preventDefault(e): void {
