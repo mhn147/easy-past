@@ -17,6 +17,6 @@ export class AppComponent implements OnInit {
             let options = {};
 
             M.Sidenav.init(elems, options);
-          });
+        });
     }
 }
