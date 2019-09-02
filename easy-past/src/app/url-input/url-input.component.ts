@@ -39,6 +39,8 @@ export class UrlInputComponent implements OnInit {
           next: function(link) {
               self.link = link;
               self.shortUrl = self.linkService.getApiDomaine() + self.link.hashid;
+              //testing indexedDb
+              self.linkService.storeLink(link);
           },
           error: function(err) {
               this.errorMessage = err;

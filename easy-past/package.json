@@ -20,6 +20,7 @@
     "@angular/router": "~8.2.3",
     "jquery": "^2.2.4",
     "materialize-css": "^1.0.0",
+    "ngx-indexed-db": "^2.2.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

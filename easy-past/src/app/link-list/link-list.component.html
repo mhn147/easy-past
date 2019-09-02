@@ -1,4 +1,4 @@
-<div class="card">
+<div *ngIf='links && links.length !== 0' class="card">
     <div class="card-content pb-0">
         <div class="__table-container">
             <table class="highlight responsive-table">
@@ -11,73 +11,17 @@
                 </thead>
         
                 <tbody>
-                    <tr>
+                    <tr *ngFor='let link of links'>
                         <td>
-                            <a href="https://rel.ink/kXMOOn">https://rel.ink/kXMOOn</a>
+                            <a [href]='link.hashid'>{{link.hashid}}</a>
                             <a class="btn-flat">
                                 <i class="material-icons" title="Copy the link">content_copy</i>
                             </a>
                         </td>
-                        <td class="created">20 minutes ago</td>
+                        <td class="created">{{ link.created_at | date:'medium'}}</td>
                         <td class="truncate original-url">
-                            <a href="https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg">
-                                https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="https://rel.ink/kXMOOn">https://rel.ink/kXMOOn</a>
-                            <a class="btn-flat">
-                                <i class="material-icons" title="Copy the link">content_copy</i>
-                            </a>
-                        </td>
-                        <td class="created">20 minutes ago</td>
-                        <td class="truncate original-url">
-                            <a href="https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg">
-                                https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="https://rel.ink/kXMOOn">https://rel.ink/kXMOOn</a>
-                            <a class="btn-flat">
-                                <i class="material-icons" title="Copy the link">content_copy</i>
-                            </a>
-                        </td>
-                        <td class="created">20 minutes ago</td>
-                        <td class="truncate original-url">
-                            <a href="https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg">
-                                https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="https://rel.ink/kXMOOn">https://rel.ink/kXMOOn</a>
-                            <a class="btn-flat">
-                                <i class="material-icons" title="Copy the link">content_copy</i>
-                            </a>
-                        </td>
-                        <td class="created">20 minutes ago</td>
-                        <td class="truncate original-url">
-                            <a href="https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg">
-                                https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="https://rel.ink/kXMOOn">https://rel.ink/kXMOOn</a>
-                            <a class="btn-flat">
-                                <i class="material-icons" title="Copy the link">content_copy</i>
-                            </a>
-                        </td>
-                        <td class="created">20 minutes ago</td>
-                        <td class="truncate original-url">
-                            <a href="https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg">
-                                https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg
+                            <a [href]='link.url'>
+                                {{link.url}}
                             </a>
                         </td>
                     </tr>
@@ -88,7 +32,7 @@
                 <div class="col s12 center-align">
                     <a class="btn teal" 
                        title="Clear all"
-                       (click)="preventDefault($event)">
+                       (click)="clearLinks($event)">
                        Clear
                     </a>
                 </div>
