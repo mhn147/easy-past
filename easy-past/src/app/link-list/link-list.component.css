@@ -9,3 +9,9 @@
 .__copy-btn {
     cursor: pointer;
 }
+
+.__table-container {
+    max-height: 35vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
