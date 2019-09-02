@@ -1,3 +1,10 @@
-.__vertical-align {
+.vertical-align {
     vertical-align: middle;
+}
+
+.app-container {
+    height: calc(100vh-64px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
