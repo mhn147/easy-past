@@ -62,7 +62,7 @@ export class UrlInputComponent implements OnInit {
         let self = this;
         self.preventDefault(e);
 
-        let inputElement = document.getElementById('short-url');
+        let inputElement = document.getElementById('short-url') as HTMLInputElement;
         inputElement.select();
         inputElement.setSelectionRange(0, 99999);
         document.execCommand('copy');

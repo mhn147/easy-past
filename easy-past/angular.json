@@ -28,7 +28,7 @@
               "src/styles.css"
             ],
             "scripts": [
-                "node_modules/materialize-css/dist/js/materialize.min.js"
+              "node_modules/materialize-css/dist/js/materialize.min.js"
             ]
           },
           "configurations": {
@@ -121,8 +121,13 @@
               "devServerTarget": "easy-past:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "easy-past"
 }
