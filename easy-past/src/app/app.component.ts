@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LinkService } from './link.service';
+
 import M from 'materialize-css';
+import { Link } from './url-input/link';
 
 @Component({
   selector: 'ep-root',
@@ -8,7 +11,15 @@ import M from 'materialize-css';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    title = 'easy-past';
+    title:string = 'easy-past';
+    addedLink = new Link();
+
+    constructor(private linkService: LinkService) {        
+    }
+
+    receiveLink($event) {
+        this.addedLink = $event;
+    }
 
     ngOnInit(): void {
         //initialization of the sidenav-trigger
@@ -18,5 +29,8 @@ export class AppComponent implements OnInit {
 
             M.Sidenav.init(elems, options);
         });
+
+        //creating the database
+        this.linkService.createDb();
     }
 }

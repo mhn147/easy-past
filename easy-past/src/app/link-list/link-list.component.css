@@ -1,9 +1,5 @@
 .original-url {
-    width: 400px;
-}
-
-.created {
-    min-width: 120px;
+    max-width: 450px;
 }
 
 .__copy-btn {
@@ -14,4 +10,12 @@
     max-height: 45vh;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+tr {
+    height: auto;
+}
+
+td {
+    height: 100%;
 }

@@ -6,7 +6,7 @@
             <form>
                 <div class="row" id="input-fields-container">
                     <div class="input-field url-input col s12 m10">
-                        <input placeholder="Enter URL" type="text" [(ngModel)]='inputUrl' name='input-url' (keyup)='onKey()'>
+                        <input autocomplete="off" placeholder="Enter URL" type="text" [(ngModel)]='inputUrl' name='input-url' (keyup)='onKey()'>
                     </div>
                     <div class="input-field col s12 m2 center-align">
                         <button type="submit" class="btn indigo darken-2"
@@ -19,11 +19,11 @@
                     </div>
                     <div class="divider"></div>
                     <div class="input-field col s12 m5">
-                        <input id="short-url" type="text" [value]="shortUrl">
+                        <input autocomplete="off" id="short-url" type="text" [value]="shortUrl">
                         <label class="active" for="short-url">Short URL</label>
                     </div>
                     <div class="input-field col s12 m2 center-align">
-                        <button [disabled]='!enableCopyBtn' type="submit" class="btn teal" title="copy url"
+                        <button type="submit" class="btn teal" title="copy url"
                                 (click)="copyToClipboard($event)">
                             Copy
                         </button>

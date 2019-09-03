@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { NgxIndexedDB } from 'ngx-indexed-db';
 
-import { ILink } from './url-input/link';
+import { Link } from './url-input/link';
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +16,15 @@ export class LinkService {
 
     constructor(private http: HttpClient) { }
 
-    private links: ILink[];
+    private links: Link[];
 
     getApiDomaine(): string {
         return 'https://rel.ink/';
     }
 
 
-    shortenUrl(url): Observable<ILink> {
-        return this.http.post<ILink>(this.relinkApiUrl, url).pipe(
-            tap(data => console.log(JSON.stringify(data))),
+    shortenUrl(url): Observable<Link> {
+        return this.http.post<Link>(this.relinkApiUrl, url).pipe(
             catchError(this.handleError)
         );
     }
@@ -37,54 +36,43 @@ export class LinkService {
         } else {
             errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
         }
-        console.error(errorMessage);
         return throwError(errorMessage);
     }
 
-    //store a link in a indexedDb database
-    storeLink(link: ILink): void {
+    createDb(): void {
         let db = new NgxIndexedDB('easy-past', 1);
         db.openDatabase(1, evt => {
             let objectStore = evt.currentTarget.result.createObjectStore('links', { keyPath: 'id', autoIncrement: true });
          
             objectStore.createIndex('hashid', 'hashid', { unique: true });
-        }).then(() => {
-            db.add('links', { hashid: link.hashid, url: link.url, create_at: link.created_at }).then(
-                () => {
-                    // Do something after the value was added
-                },
-                error => {
-                    console.log(error);
-                }
-            );
+        });
+    }
+
+    add(link: Link): void {
+        let db = new NgxIndexedDB('easy-past', 1);
+        db.openDatabase(1).then(() => {
+            db.add('links', { hashid: link.hashid, url: link.url, created_at: link.created_at });
         })
     }
+
 
     clearAll(): void {
         let db = new NgxIndexedDB('easy-past', 1);
         db.openDatabase(1).then(() => {
-            db.clear('links').then(
-                () => {
-                    // Do something after clear
-                },
-                error => {
-                    console.log(error);
-                }
-            );
+            db.clear('links');
         })
     }
 
     getAll(): any {
-        let db = new NgxIndexedDB('easy-past', 1);
-        db.openDatabase(1).then(() => {
-            db.getAll('links').then(
-                links => {
-                    return links;
-                },
-                error => {
-                    console.log(error);
-                }
-            );
-        });
+        return new Promise(resolve => {
+            let db = new NgxIndexedDB('easy-past', 1);
+            db.openDatabase(1).then(() => {
+                db.getAll('links').then(
+                    links => {
+                        resolve(links);
+                    }
+                );
+            });
+        })
     }
 }

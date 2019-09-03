@@ -14,21 +14,21 @@
                     <tr *ngFor='let link of links'>
                         <td>
                             <a [href]='link.hashid'>{{link.hashid}}</a>
-                            <a class="btn-flat">
-                                <i class="material-icons" title="Copy the link">content_copy</i>
+                            <a class="btn-flat" (click)="copyToClipboard($event, link)">
+                                <i class="tiny material-icons" title="Copy the link">content_copy</i>
                             </a>
                         </td>
-                        <td class="created">{{ link.created_at | date:'medium'}}</td>
+                        <td>{{ link.created_at | date:'medium'}}</td>
                         <td class="truncate original-url">
-                            <a [href]='link.url'>
-                                {{link.url}}
-                            </a>
+                            <a [href]='link.url'>{{link.url}}</a>
+                            <!-- ugly fix to horizontally align row cells -->
+                            <a class="btn-flat" (click)="copyToClipboard($event, link)"></a>
                         </td>
                     </tr>
                 </tbody>
             </table>
 
-            <div class="section row">
+            <div class="section row" id="link-list-actions">
                 <div class="col s12 center-align">
                     <a class="btn teal" 
                        title="Clear all"
