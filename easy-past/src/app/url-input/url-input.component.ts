@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { LinkService } from '../link.service';
 import { Link } from './link';
+import validator from 'validator';
 
 @Component({
     selector: 'ep-url-input',
@@ -55,7 +56,8 @@ export class UrlInputComponent implements OnInit {
     }
 
     validateURL(): boolean {
-        return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(this.inputUrl);
+        return validator.isURL(this.inputUrl);
+        //return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(this.inputUrl);
     }
 
     copyToClipboard(e): void {

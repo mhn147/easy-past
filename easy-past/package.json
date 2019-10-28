@@ -23,6 +23,7 @@
     "ngx-indexed-db": "^2.2.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
+    "validator": "^12.0.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
